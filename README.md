@@ -1,11 +1,13 @@
-# Spring WebSocket STOMP + RabbitMQ [![CI](https://github.com/daggerok/spring-websocket-stomp/actions/workflows/ci.yaml/badge.svg)](https://github.com/daggerok/spring-websocket-stomp/actions/workflows/ci.yaml)
+# Spring WebSocket STOMP [![CI](https://github.com/daggerok/spring-websocket-stomp/actions/workflows/ci.yaml/badge.svg)](https://github.com/daggerok/spring-websocket-stomp/actions/workflows/ci.yaml)
+
+Spring WebSocker STOMP app using simple in-memory, RabbitMQ and ActiveMQ message brokers
 
 ## simple-in-memory-broker
 
 ```bash
 ./mvnw -f simple-in-memory-broker clean compile spring-boot:start
 
-open http://127.0.0.1:8001
+open http://127.0.0.1:8001 # click connect, type message and press enter
 
 ./mvnw -f simple-in-memory-broker spring-boot:stop
 ```
@@ -16,7 +18,7 @@ open http://127.0.0.1:8001
 docker compose -f ./rabbitmq-broker/docker-compose.yml up -d --build 
 ./mvnw -f rabbitmq-broker clean compile spring-boot:start
 
-open http://127.0.0.1:8002
+open http://127.0.0.1:8002 # click connect, type message and press enter
 
 ./mvnw -f rabbitmq-broker spring-boot:stop
 docker compose -f ./rabbitmq-broker/docker-compose.yml down -v --rmi local
@@ -28,11 +30,18 @@ docker compose -f ./rabbitmq-broker/docker-compose.yml down -v --rmi local
 docker compose -f ./activemq-broker/docker-compose.yml up -d --build 
 ./mvnw -f activemq-broker clean compile spring-boot:start
 
-open http://127.0.0.1:8003
+open http://127.0.0.1:8003 # click connect, type message and press enter
 
 ./mvnw -f activemq-broker spring-boot:stop
 docker compose -f ./activemq-broker/docker-compose.yml down -v --rmi local
 ```
+
+## other repos
+* https://github.com/daggerok/spring-boot-rest-jms-activemq
+* https://github.com/daggerok/sockjs-stomp-websocket-react-and-vanilla
+* https://github.com/daggerok/spring-streaming
+* https://github.com/daggerok/wsock
+* https://github.com/daggerok/spring-security-rest-auth-token
 
 ## rtfm
 

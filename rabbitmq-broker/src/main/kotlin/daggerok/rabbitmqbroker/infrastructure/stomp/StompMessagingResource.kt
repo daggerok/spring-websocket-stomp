@@ -1,6 +1,6 @@
-package daggerok.simpleinmemorybroker.infrastructure.stomp
+package daggerok.rabbitmqbroker.infrastructure.stomp
 
-import daggerok.simpleinmemorybroker.messages.Messages
+import daggerok.rabbitmqbroker.messages.Messages
 import mu.KLogging
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler
 import org.springframework.messaging.handler.annotation.MessageMapping

@@ -1,4 +1,4 @@
-package daggerok.activemqbroker.users
+package daggerok.rabbitmqbroker.users
 
 import java.time.Instant
 import javax.persistence.Entity

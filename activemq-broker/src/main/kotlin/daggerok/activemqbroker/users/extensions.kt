@@ -1,9 +1,5 @@
 package daggerok.activemqbroker.users
 
-import daggerok.activemqbroker.messages.GetAllUsersDocument
-import daggerok.activemqbroker.messages.SaveUserDocument
-import daggerok.activemqbroker.messages.UserDTO
-
 fun User.toDocument() =
     SaveUserDocument(user = toDTO())
 

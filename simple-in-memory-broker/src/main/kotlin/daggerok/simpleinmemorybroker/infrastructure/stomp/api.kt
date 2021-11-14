@@ -14,3 +14,7 @@ data class MessageDocument(
     val createdAt: String = "",
     val updatedAt: String = "",
 )
+
+data class ErrorDocument(
+    val error: String,
+)

@@ -1,35 +1,31 @@
-package daggerok.simpleinmemorybroker
+package daggerok.activemqbroker.users
 
-import daggerok.activemqbroker.messages.UserDTO
 import java.time.Instant
 
-// save message
+// save or update user
 
-data class SaveMessageCommand(
-    val body: String,
-    val senderId: Long? = null,
-    val recipientsIds: Iterable<Long> = setOf(),
+data class SaveOrUpdateUserCommand(
+    val id: Long? = null,
+    val name: String,
 )
 
-data class SaveMessageDocument(
-    val message: MessageDTO,
+data class SaveUserDocument(
+    val user: UserDTO,
 )
 
-// get all messages
+// get all users
 
-class GetAllMessagesQuery
+class GetAllUsersQuery
 
-data class GetAllMessagesDocument(
-    val messages: Iterable<MessageDTO> = setOf(),
+data class GetAllUsersDocument(
+    val users: Iterable<UserDTO> = listOf()
 )
 
 // DTOs
 
-data class MessageDTO(
+data class UserDTO(
     val id: Long? = null,
-    val body: String,
-    val sender: UserDTO? = null,
-    val recipients: Iterable<UserDTO> = setOf(),
+    val name: String,
     val createdAt: Instant? = null,
     val updatedAt: Instant? = null,
 )

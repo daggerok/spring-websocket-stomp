@@ -1,6 +1,6 @@
-package daggerok.activemqbroker.infrastructure.stomp
+package daggerok.rabbitmqbroker.infrastructure.stomp
 
-import daggerok.activemqbroker.messages.Message
+import daggerok.rabbitmqbroker.messages.Message
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter

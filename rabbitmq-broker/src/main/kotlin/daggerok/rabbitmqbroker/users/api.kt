@@ -1,6 +1,6 @@
-package daggerok.simpleinmemorybroker
+package daggerok.rabbitmqbroker.users
 
-import daggerok.activemqbroker.messages.UserDTO
+import daggerok.rabbitmqbroker.messages.UserDTO
 import java.time.Instant
 
 // save message

@@ -5,7 +5,7 @@ class WebSocketController {
   }
 
   connect() {
-    // java server: r.addEndpoint("/stomp-websocket-endpoint")
+    // Java: r.addEndpoint("/stomp-websocket-endpoint")
     const socket = new SockJS('/stomp-websocket-endpoint');
     this.stompClient = Stomp.over(socket);
     this.stompClient.connect({}, this._onConnected);
@@ -15,9 +15,11 @@ class WebSocketController {
 
   _onConnected(frame) {
     this._setConnected(true); // console.log('Connected: ' + frame);
-    // java server: r.enableSimpleBroker("/topic")
-    // java server: @SendTo("/topic/messages")
+    // Java: r.enableSimpleBroker("/topic")
+    // Java: @SendTo("/topic/messages")
     this.stompClient.subscribe('/topic/messages', this._showMessage);
+    // Java: @SendTo("/topic/errors")
+    this.stompClient.subscribe('/topic/errors', this._showError);
   }
 
   _setConnected(connected) {
@@ -50,8 +52,8 @@ class WebSocketController {
     const htmlElement = document.getElementById('text');
     const sendMessageCommand = { message: htmlElement.value };
     const sendMessageCommandJsonBody = JSON.stringify(sendMessageCommand);
-    // java server: r.setApplicationDestinationPrefixes("/stomp-application")
-    // java server: @MessageMapping("/messages")
+    // Java: r.setApplicationDestinationPrefixes("/stomp-application")
+    // Java: @MessageMapping("/messages")
     this.stompClient.send('/stomp-application/messages', {}, sendMessageCommandJsonBody);
     htmlElement.value = '';
   }
@@ -65,6 +67,13 @@ class WebSocketController {
     messageDiv.style.wordWrap = 'break-word';
     messageDiv.appendChild(document.createTextNode(createdAt + ': ' + messageContent));
     messagesContainer.prepend(messageDiv);
+  }
+
+  _showError(errorMessage) {
+    const errorMessageDocumentJsonBody = errorMessage.body;
+    const errorMessageDocument = JSON.parse(errorMessageDocumentJsonBody);
+    const { error: errorMessageContent } = errorMessageDocument;
+    console.error(errorMessageContent);
   }
 }
 

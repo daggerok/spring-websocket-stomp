@@ -1,4 +1,4 @@
-package daggerok.activemqbroker.infrastructure.stomp
+package daggerok.rabbitmqbroker.infrastructure.stomp
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding

@@ -1,4 +1,4 @@
-package daggerok.simpleinmemorybroker
+package daggerok.simpleinmemorybroker.users
 
 import daggerok.simpleinmemorybroker.messages.UserDTO
 import java.time.Instant

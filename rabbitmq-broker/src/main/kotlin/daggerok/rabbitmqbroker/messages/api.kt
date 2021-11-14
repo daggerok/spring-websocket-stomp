@@ -1,4 +1,4 @@
-package daggerok.activemqbroker.messages
+package daggerok.rabbitmqbroker.messages
 
 import java.time.Instant
 

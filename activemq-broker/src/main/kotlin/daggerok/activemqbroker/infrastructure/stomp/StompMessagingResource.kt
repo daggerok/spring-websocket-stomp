@@ -2,25 +2,31 @@ package daggerok.activemqbroker.infrastructure.stomp
 
 import daggerok.activemqbroker.messages.Messages
 import mu.KLogging
+import org.springframework.messaging.handler.annotation.MessageExceptionHandler
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
 class StompMessagingResource(private val messages: Messages) {
 
-    @GetMapping("/")
-    fun index() = "index"
-
-    @MessageMapping("/messages") // stompClient.send('/stomp-application/messages', {}, json);
-    @SendTo("/topic/messages") // stompClient.subscribe('/topic/messages', f);
+    @MessageMapping("/messages") // JavaScript: stompClient.send('/stomp-application/messages', {}, json);
+    @SendTo("/topic/messages") // JavaScript: stompClient.subscribe('/topic/messages', f);
     fun relay(command: SendMessageCommand): MessageDocument = run {
         val messageEntity = command.toEntity()
+        if (messageEntity.body.contains("error")) throw RuntimeException("Error on $messageEntity save")
         val savedMessage = messages.save(messageEntity)
         logger.info { "saved: $savedMessage" }
         savedMessage.toDocument()
     }
+
+    @MessageExceptionHandler
+    @SendTo("/topic/errors") // JavaScript: stompClient.subscribe('/topic/errors', f);
+    fun handleError(e: Throwable) =
+        (e.message ?: "Unexpected error").let {
+            logger.warn(e) { it }
+            ErrorDocument(it)
+        }
 
     private companion object : KLogging()
 }

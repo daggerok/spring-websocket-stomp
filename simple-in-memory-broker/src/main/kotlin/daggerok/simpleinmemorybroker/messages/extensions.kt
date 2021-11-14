@@ -1,8 +1,8 @@
 package daggerok.simpleinmemorybroker.messages
 
-import daggerok.simpleinmemorybroker.GetAllMessagesDocument
-import daggerok.simpleinmemorybroker.MessageDTO
-import daggerok.simpleinmemorybroker.SaveMessageDocument
+import daggerok.simpleinmemorybroker.users.GetAllMessagesDocument
+import daggerok.simpleinmemorybroker.users.MessageDTO
+import daggerok.simpleinmemorybroker.users.SaveMessageDocument
 import daggerok.simpleinmemorybroker.users.toDTOs
 import daggerok.simpleinmemorybroker.users.toNullOrDTO
 

@@ -1,7 +1,5 @@
 package daggerok.activemqbroker.users
 
-import daggerok.activemqbroker.messages.GetAllUsersQuery
-import daggerok.activemqbroker.messages.SaveOrUpdateUserCommand
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping

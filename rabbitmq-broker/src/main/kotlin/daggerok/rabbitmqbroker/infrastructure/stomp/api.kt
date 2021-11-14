@@ -1,6 +1,6 @@
-package daggerok.activemqbroker.infrastructure.stomp
+package daggerok.rabbitmqbroker.infrastructure.stomp
 
-import daggerok.activemqbroker.users.User
+import daggerok.rabbitmqbroker.users.User
 
 data class SendMessageCommand(
     val message: String = "",
@@ -13,4 +13,8 @@ data class MessageDocument(
     val recipients: Collection<User> = setOf(),
     val createdAt: String = "",
     val updatedAt: String = "",
+)
+
+data class ErrorDocument(
+    val error: String,
 )

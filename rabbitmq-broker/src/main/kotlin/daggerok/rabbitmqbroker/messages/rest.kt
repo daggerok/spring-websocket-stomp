@@ -1,8 +1,8 @@
-package daggerok.activemqbroker.messages
+package daggerok.rabbitmqbroker.messages
 
-import daggerok.simpleinmemorybroker.GetAllMessagesQuery
-import daggerok.simpleinmemorybroker.SaveMessageCommand
-import daggerok.activemqbroker.users.Users
+import daggerok.rabbitmqbroker.users.GetAllMessagesQuery
+import daggerok.rabbitmqbroker.users.SaveMessageCommand
+import daggerok.rabbitmqbroker.users.Users
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping

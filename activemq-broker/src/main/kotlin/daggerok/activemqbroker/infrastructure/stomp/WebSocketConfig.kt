@@ -13,9 +13,9 @@ class WebSocketConfig(private val brokerProperties: BrokerProperties) : WebSocke
 
     override fun configureMessageBroker(registry: MessageBrokerRegistry) {
         registry
-            // stompClient.send('/stomp-application/messages', {}, json);
+            // JavaScript: stompClient.send('/stomp-application/messages', {}, json);
             .setApplicationDestinationPrefixes(brokerProperties.applicationDestinationPrefix)
-            // stompClient.subscribe('/topic/messages', f);
+            // JavaScript: stompClient.subscribe('/topic/messages', f);
             .enableStompBrokerRelay(brokerProperties.destinationPrefix)
             .setRelayHost(brokerProperties.relayHost)
             .setRelayPort(brokerProperties.relayPort)
@@ -25,7 +25,7 @@ class WebSocketConfig(private val brokerProperties: BrokerProperties) : WebSocke
 
     override fun registerStompEndpoints(registry: StompEndpointRegistry) {
         registry
-            // new SockJS('/stomp-websocket-endpoint');
+            // JavaScript: new SockJS('/stomp-websocket-endpoint');
             .addEndpoint(brokerProperties.endpoint)
             .withSockJS()
     }

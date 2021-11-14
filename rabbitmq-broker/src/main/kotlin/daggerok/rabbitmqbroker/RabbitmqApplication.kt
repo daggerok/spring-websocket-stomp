@@ -1,4 +1,4 @@
-package daggerok.activemqbroker
+package daggerok.rabbitmqbroker
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

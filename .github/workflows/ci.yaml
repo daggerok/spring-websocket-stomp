@@ -12,7 +12,7 @@ on:
 env:
   JAVA_VERSION: 1.8
 jobs:
-  tests:
+  activemq-broker:
     if: github.event.inputs.trigger == ''
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -34,11 +34,34 @@ jobs:
       with:
         java-version: ${{ env.JAVA_VERSION }}
     - run: docker compose -f ./activemq-broker/docker-compose.yml up -d --build
+    - run: ./mvnw -B dependency:resolve dependency:resolve-plugins
+    - run: ./mvnw
+    - run: docker compose -f ./activemq-broker/docker-compose.yml down -v --rmi local
+  rabbitmq-broker:
+    if: github.event.inputs.trigger == ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v2
+      id: ci
+      with:
+        path: |
+          ~/.npm
+          ~/.node
+          ~/.local
+          ~/.gradle
+          ~/.docker
+          ~/.m2/repository
+          !~/.m2/repository/com/gituhb/daggerok
+        key: ${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+    - uses: actions/setup-java@v1
+      with:
+        java-version: ${{ env.JAVA_VERSION }}
     - run: docker compose -f ./rabbitmq-broker/docker-compose.yml up -d --build
     - run: ./mvnw -B dependency:resolve dependency:resolve-plugins
     - run: ./mvnw
     - run: docker compose -f ./rabbitmq-broker/docker-compose.yml down -v --rmi local
-    - run: docker compose -f ./activemq-broker/docker-compose.yml down -v --rmi local
   dependency-updates:
     if: contains(github.event.inputs.trigger, 'M')
       || startsWith(github.event.inputs.trigger, 'm')

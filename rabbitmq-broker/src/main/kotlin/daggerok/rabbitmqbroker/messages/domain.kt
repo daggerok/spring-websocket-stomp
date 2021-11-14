@@ -1,6 +1,6 @@
-package daggerok.activemqbroker.messages
+package daggerok.rabbitmqbroker.messages
 
-import daggerok.activemqbroker.users.User
+import daggerok.rabbitmqbroker.users.User
 import java.time.Instant
 import javax.persistence.CascadeType.MERGE
 import javax.persistence.CascadeType.PERSIST
