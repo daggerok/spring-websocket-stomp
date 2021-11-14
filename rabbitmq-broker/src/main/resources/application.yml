@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: rabbitmq-broker
+  output:
+    ansi:
+      enabled: always
+  liquibase:
+    enabled: true
+    change-log: classpath*:/db/changelog/master.xml
+  datasource:
+    username: ${spring.application.name}
+    password: ${spring.application.name}
+    url: jdbc:h2:file:./target/${spring.application.name};AUTO_SERVER=TRUE
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    generate-ddl: true
+    open-in-view: false
+server:
+  port: 8002
+logging:
+  level:
+    org.hibernate.SQL: trace
+    #org.springframework.messaging: trace
+broker:
+  application-destination-prefix: /stomp-application
+  destination-prefix: /topic
+  endpoint: /stomp-websocket-endpoint
+  relay-host: localhost
+  relay-port: 61613
+  client-login: guest
+  client-passcode: guest

@@ -1,0 +1,17 @@
+version: '2.1'
+networks:
+  localnet:
+services:
+  activemq:
+    image: webcenter/activemq:5.14.3
+    ports:
+    - "8161:8161"   # ui
+    - "61613:61613" # stomp
+    environment:
+      ACTIVEMQ_ADMIN_LOGIN: guest
+      ACTIVEMQ_ADMIN_PASSWORD: guest
+      ACTIVEMQ_REMOVE_DEFAULT_ACCOUNT: "true"
+      ACTIVEMQ_ENABLED_SCHEDULER: "true"
+      ACTIVEMQ_MAX_MEMORY: 2048
+      ACTIVEMQ_MIN_MEMORY: 512
+    networks: [localnet]

@@ -1,0 +1,54 @@
+POST http://localhost:8001/api/users
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Max"
+}
+
+###
+
+POST http://localhost:8001/api/users
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Maksim"
+}
+
+###
+
+POST http://localhost:8001/api/users
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Maksimko"
+}
+
+###
+
+GET http://localhost:8001/api/users
+Accept: application/json
+
+###
+
+POST http://localhost:8001/api/messages
+Accept: application/json
+Content-Type: application/json
+
+{
+  "body": "Hello, World!",
+  "senderId": 1,
+  "recipientsIds": [
+    2,
+    3
+  ]
+}
+
+###
+
+GET http://localhost:8001/api/messages
+Accept: application/json
+
+###

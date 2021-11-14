@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- HSQLDB data types -->
+    <property name="timestamp.type" dbms="hsqldb" value="timestamp"/>
+    <property name="datetime.type" dbms="hsqldb" value="datetime"/>
+    <property name="date.type" dbms="hsqldb" value="date"/>
+    <property name="decimal.type" dbms="hsqldb" value="DECIMAL(19,8)"/>
+    <property name="double.type" dbms="hsqldb" value="double"/>
+    <property name="boolean.type" dbms="hsqldb" value="BIT"/>
+    <property name="blob.type" dbms="hsqldb" value="BLOB"/>
+    <property name="now" dbms="hsqldb" value="CURRENT_TIMESTAMP"/>
+
+    <changeSet id="V202111132241" author="Maksim Kostromin">
+        <comment>JPA application schema</comment>
+
+        <createSequence
+          sequenceName="hibernate_sequence"
+          startValue="1"
+          incrementBy="1"
+        />
+
+        <createTable tableName="messages">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="messages_pk"/>
+            </column>
+            <column name="body" type="CLOB"/>
+            <column name="sender_id" type="BIGINT"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="updated_at" type="TIMESTAMP" defaultValue="now()"/>
+        </createTable>
+
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="users_pk"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="updated_at" type="TIMESTAMP" defaultValue="${now}"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+          baseTableName="messages" baseColumnNames="sender_id"
+          constraintName="messages_sender_user_id_fk"
+          referencedTableName="users"
+          referencedColumnNames="id"
+        />
+
+        <createTable tableName="users_messages">
+            <column name="message_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+
+        <!--<addUniqueConstraint
+          tableName="users_messages"
+          columnNames="message_id, user_id"
+          constraintName="users_messages_unique_constraint"
+        />-->
+
+        <addForeignKeyConstraint
+          baseTableName="users_messages" baseColumnNames="message_id"
+          constraintName="users_messages_message_id_fk"
+          referencedTableName="messages"
+          referencedColumnNames="id"
+        />
+
+        <addForeignKeyConstraint
+          baseTableName="users_messages" baseColumnNames="user_id"
+          constraintName="users_messages_recipient_user_id_fk"
+          referencedTableName="users"
+          referencedColumnNames="id"
+        />
+    </changeSet>
+
+</databaseChangeLog>

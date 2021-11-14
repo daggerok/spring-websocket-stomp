@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>STOMP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="shortcut icon" th:href="@{/favicon.ico}" href="/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <script th:src="@{/webjars/sockjs-client/sockjs.min.js}" src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script th:src="@{/webjars/stomp-websocket/stomp.min.js}" src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script th:src="@{/app.js}" src="/app.js"></script>
+
+    <style>
+        body,
+        input[type=text],
+        input[type=button] {
+            font-family: 'Roboto', 'Helvetica', Arial sans-serif;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+    </style>
+</head>
+
+<body onload="webSocket.disconnect();">
+
+<div>
+    <div>
+        <button id="connect"
+                onclick="webSocket.connect();">Connect
+        </button>
+        <button id="disconnect"
+                disabled="disabled"
+                onclick="webSocket.disconnect();">Disconnect
+        </button>
+    </div>
+
+    <div id="message">
+        <input id="text"
+               type="text"
+               placeholder="Write a message and press Enter"/>
+    </div>
+
+    <div id="messages-container"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+version: '2.1'
+networks:
+  localnet:
+services:
+  rabbitmq:
+    build: ./src/main/docker
+    ports:
+    - '15672:15672' # ui
+    - '61613:61613' # stomp
+    networks: [localnet]
